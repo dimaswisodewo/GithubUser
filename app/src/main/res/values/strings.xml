@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Github User</string>
+    <string name="username">\@Username</string>
+    <string name="full_name">Full Name</string>
+    <string name="github_users">GitHub Users</string>
+    <string name="location">Location</string>
+    <string name="repositories">Repositories</string>
+    <string name="company">Company</string>
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="share">Share</string>
+    <string name="error_message">Error Message</string>
+    <string name="oops">Oops!</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Type username</string>
+    <string name="octocat">Octocat</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_text_detail_1">Following</string>
+    <string name="tab_text_detail_2">Followers</string>
+    <string name="main_page_title">Search results will be shown here</string>
+    <string name="null_text">NULL</string>
+</resources>
