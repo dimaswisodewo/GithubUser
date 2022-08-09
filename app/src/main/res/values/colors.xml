@@ -13,4 +13,8 @@
     <color name="blue_light">#064663</color>
     <color name="blue_dark">#040303</color>
     <color name="yellow_light">#ECB365</color>
+
+    <color name="blue_primary_night">#FFFFFF</color>
+    <color name="blue_secondary_night">#C8EEFF</color>
+    <color name="blue_light_night">#8ACAE8</color>
 </resources>

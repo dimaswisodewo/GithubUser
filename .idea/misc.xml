@@ -7,11 +7,14 @@
         <entry key="app/src/main/res/font/font.xml" value="0.37407407407407406" />
         <entry key="app/src/main/res/layout-v28/item_list_user.xml" value="0.353713768115942" />
         <entry key="app/src/main/res/layout/activity_detail_user.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_favorites.xml" value="0.2164855072463768" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.353713768115942" />
         <entry key="app/src/main/res/layout/fragment_error_main.xml" value="0.290625" />
         <entry key="app/src/main/res/layout/fragment_user_list.xml" value="0.196875" />
+        <entry key="app/src/main/res/layout/item_list_favorite_user.xml" value="0.2164855072463768" />
         <entry key="app/src/main/res/layout/item_list_user.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/favorite_option_menu.xml" value="0.26614583333333336" />
         <entry key="app/src/main/res/menu/option_menu.xml" value="0.196875" />
       </map>
     </option>

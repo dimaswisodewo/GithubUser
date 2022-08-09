@@ -7,22 +7,33 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.CompoundButton
 import androidx.appcompat.widget.SearchView
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.githubuser.R
 import com.dicoding.githubuser.databinding.ActivityMainBinding
 import com.dicoding.githubuser.model.UserDetailResponse
 import com.dicoding.githubuser.model.UserDetails
+import com.dicoding.githubuser.other.SettingPreferences
 import com.dicoding.githubuser.view.detail.DetailUserActivity
+import com.dicoding.githubuser.view.favorites.FavoritesActivity
 import com.dicoding.githubuser.viewmodel.MainViewModel
+import com.dicoding.githubuser.viewmodel.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
-    private val mainViewModel by viewModels<MainViewModel>()
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
+
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +41,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.title = resources.getString(R.string.github_users)
+
+        val pref = SettingPreferences.getInstance(dataStore)
+        mainViewModel = ViewModelProvider(this, ViewModelFactory(application, pref)).get(
+            MainViewModel::class.java
+        )
+        mainViewModel.getThemeSettings().observe(this
+        ) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                binding.switchTheme.isChecked = true
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                binding.switchTheme.isChecked = false
+            }
+        }
+
+        binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            mainViewModel.saveThemeSetting(isChecked)
+        }
 
         subscribe()
     }
@@ -59,6 +89,17 @@ class MainActivity : AppCompatActivity() {
         })
 
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.favorites -> {
+                val favoritesIntent = Intent(this@MainActivity, FavoritesActivity::class.java)
+                startActivity(favoritesIntent)
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun subscribe() {

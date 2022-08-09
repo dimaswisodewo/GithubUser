@@ -2,6 +2,7 @@ package com.dicoding.githubuser.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 data class User(
     val login: String?,

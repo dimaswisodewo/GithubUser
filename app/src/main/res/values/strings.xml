@@ -20,4 +20,9 @@
     <string name="tab_text_detail_2">Followers</string>
     <string name="main_page_title">Search results will be shown here</string>
     <string name="null_text">NULL</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="favorites">Favorites</string>
+    <string name="you_have_not_favorited_any_user">You have not favorited any user</string>
+    <string name="button_to_add_favorites">button to add favorites</string>
+    <string name="octocat_logo">octocat logo</string>
 </resources>

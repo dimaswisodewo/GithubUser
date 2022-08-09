@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class DetailUserPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
 
-    var fragment = UserListFragment()
+    private var fragment = UserListFragment()
 
     override fun getItemCount(): Int {
         return 2

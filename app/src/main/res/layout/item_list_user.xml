@@ -34,7 +34,6 @@
             app:layout_constraintStart_toEndOf="@+id/img_user_photo"
             app:layout_constraintTop_toTopOf="@+id/img_user_photo"
             android:layout_marginStart="16dp"
-            android:textColor="@color/blue_light"
             android:text="@string/username" />
 
         <TextView

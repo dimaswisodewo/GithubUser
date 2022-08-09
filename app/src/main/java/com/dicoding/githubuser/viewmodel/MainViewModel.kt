@@ -1,18 +1,21 @@
 package com.dicoding.githubuser.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
 import com.dicoding.githubuser.model.ItemsItem
 import com.dicoding.githubuser.model.UserDetailResponse
 import com.dicoding.githubuser.model.UserSearchResponse
 import com.dicoding.githubuser.networking.ApiConfig
 import com.dicoding.githubuser.other.Event
+import com.dicoding.githubuser.other.SettingPreferences
+import com.dicoding.githubuser.room.UserEntity
+import com.dicoding.githubuser.room.UserRepository
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application, private val pref: SettingPreferences) : ViewModel() {
 
     private val _searchedUserDetails = MutableLiveData<List<UserDetailResponse>>()
     val searchedUserDetails: LiveData<List<UserDetailResponse>> get() = _searchedUserDetails
@@ -23,10 +26,16 @@ class MainViewModel : ViewModel() {
     private val _isError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> get() = _isError
 
+    private val _mUserRepository: UserRepository = UserRepository(application)
+
     var isSnackbarShown: Event<Boolean> = Event(false)
 
     var errorMessage: String = ""
         private set
+
+    fun getAllUsers(): LiveData<List<UserEntity>> {
+        return _mUserRepository.getAllUsers()
+    }
 
     fun getSearchedUsers(username: String) {
         _isLoading.value = true
@@ -106,6 +115,16 @@ class MainViewModel : ViewModel() {
 
         _isError.value = true
         _isLoading.value = false
+    }
+
+    fun getThemeSettings(): LiveData<Boolean> {
+        return pref.getThemeSetting().asLiveData()
+    }
+
+    fun saveThemeSetting(isDarkModeActive: Boolean) {
+        viewModelScope.launch {
+            pref.saveThemeSetting(isDarkModeActive)
+        }
     }
 
     companion object {
